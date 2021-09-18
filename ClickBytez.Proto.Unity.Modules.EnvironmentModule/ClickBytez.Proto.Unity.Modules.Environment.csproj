@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ClickBytez.Proto.Unity.Core\ClickBytez.Proto.Unity.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="UnityEngine">
+      <HintPath>..\ClickBytez.Proto.UnityIoC\lib\UnityEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

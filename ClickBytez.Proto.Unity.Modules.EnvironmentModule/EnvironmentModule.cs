@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace ClickBytez.Proto.Unity.Modules.Environment
 {
-    public class EnvironmentModule : IGameModule
+    public class EnvironmentModule : IGameModule, IEnvironment
     {
-        private static GameObject _sun;
-        public static GameObject Sun
+        private GameObject _sun = default;
+        public GameObject Sun
         {
             get
             {

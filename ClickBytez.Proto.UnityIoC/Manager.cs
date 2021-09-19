@@ -1,29 +1,36 @@
 ﻿using Autofac;
 using ClickBytez.Proto.Unity.Core;
+using ClickBytez.Proto.Unity.Core.Configuration;
+using ClickBytez.Proto.Unity.Modules.Environment;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ClickBytez.Proto.Unity
 {
     public class Manager : MonoBehaviour
     {
-        ContainerBuilder _builder = default;
-        IContainer _container = default;
-        IGame _game = default;
-        ContainerBuilder Builder
+        private ContainerBuilder _builder = default;
+        private IContainer _container = default;
+        private IGame _game = default;
+
+        private ContainerBuilder Builder
         {
             get
             {
                 if (_builder is null)
                 {
                     _builder = new ContainerBuilder();
-                    _builder.RegisterType<Game>().As<IGame>();
+                    _builder.RegisterType<EnvironmentModule>().AsImplementedInterfaces().SingleInstance();
+                    _builder.RegisterType<Game>().As<IGame>().SingleInstance().OnActivated(args => args.Instance.SetInstance(args.Instance));
                 }
+
                 return _builder;
             }
             set => _builder = value;
         }
-        IContainer Container
+
+        private IContainer Container
         {
             get
             {
@@ -35,7 +42,8 @@ namespace ClickBytez.Proto.Unity
             }
             set => _container = value;
         }
-        IGame Game
+
+        private IGame Game
         {
             get
             {
@@ -46,9 +54,12 @@ namespace ClickBytez.Proto.Unity
                 return _game;
             }
         }
-                                                              
-        void Awake()
-        {  
+
+        public GameConfiguration GameConfiguration { get => gameConfiguration; set => gameConfiguration = value; }
+
+        private void Awake()
+        {
+            // Method intentionally left empty.
         }
 
         IEnumerator Start()
@@ -56,7 +67,17 @@ namespace ClickBytez.Proto.Unity
             yield return new WaitForSeconds(2.5f);
         }
 
-        void Update() 
-            => Game.Tick();
-    }                                        
+        void Update()
+        {
+            Game.Tick();
+        }
+
+
+        #region UNITY_PROPERTIES  
+        [SerializeField]
+        [SerializeReference]
+        private GameConfiguration gameConfiguration = new GameConfiguration();
+        #endregion
+
+    }
 }

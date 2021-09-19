@@ -1,5 +1,6 @@
 ﻿using ClickBytez.Proto.Unity.Core;
 using ClickBytez.Proto.Unity.Core.Extensions;
+using ClickBytez.Proto.Unity.Modules.Environment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,19 @@ namespace ClickBytez.Proto.Unity
 {
     public class Game : IGame
     {
-        public static readonly EnvironmentModule Environment = new EnvironmentModule();
-        private static GameObject _camera;
-        private static List<GameObject> Objects = new List<GameObject>();
         private static Random Random = new Random();
+        private GameObject _camera;
+        public Game(IEnvironment environment)
+        {
+            Environment = environment;
+        }
 
-        public static Action ExecutionStrategy { get; set; } = InitializeWorld;
+        public static Action ExecutionStrategy { get; private set; } = InitializeWorld;
+        public static Game Instance { get; private set; }
+        public IEnvironment Environment { get; }
+        public List<GameObject> Objects { get; set; } = new List<GameObject>();
 
-        private static GameObject Camera
+        private GameObject Camera
         {
             get
             {
@@ -28,40 +34,34 @@ namespace ClickBytez.Proto.Unity
                 return _camera;
             }
         }
+
         public void Tick()
             => ExecutionStrategy();
 
         internal static void InternalTick()
         {
-            Camera.transform.position += new Vector3(0.001f, 0.001f, 0.0f);
-            Camera.transform.LookAt(new Vector3(0f, 0f, 0f));
-            Environment.Sun.transform.Rotate(0.01f, 0.01f, 0.01f);
+            Instance.Camera.transform.position += new Vector3(0.001f, 0.001f, 0.0f);
+            Instance.Camera.transform.LookAt(new Vector3(0f, 0f, 0f));
 
-            Objects.ForEach((@object, index) =>
+            Instance.Environment.Sun.transform.Rotate(0.01f, 0.01f, 0.01f);
+            Instance.Objects.ForEach((@object, index) =>
             {
                 @object.transform.Rotate(new Vector3(0.01f * index, -0.02f * index, 0f));
             });
         }
 
+        internal void SetInstance(Game instance)
+        {
+            if (Instance is null) Instance = instance;
+            else throw new InvalidOperationException("Instance already set.");
+        }
         private static void InitializeWorld()
         {
-            Mesh testMesh = new Mesh();
-
-            testMesh.vertices = new Vector3[4]
-            {
-                new Vector3(0, 0, 0),
-                new Vector3(100, 0, 0),
-                new Vector3(0, 100, 0),
-                new Vector3(100, 100, 0)
-            };
-
-            Mesh go = GameObject.Instantiate(testMesh, new Vector3(0f, 0f, 0f), new Quaternion(45f, 0f, 0f, 1f));
-
             Enumerable.Range(1, 500).ToList().ForEach(index =>
             {
                 GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 cube.transform.position = new Vector3((float)Random.NextDouble() * 10f, 1f, (float)Random.NextDouble() * 100f);
-                Objects.Add(cube);
+                Instance.Objects.Add(cube);
             });
 
             ExecutionStrategy = InternalTick;

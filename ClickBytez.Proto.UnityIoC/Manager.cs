@@ -2,8 +2,10 @@
 using ClickBytez.Proto.Unity.Core;
 using ClickBytez.Proto.Unity.Core.Configuration;
 using ClickBytez.Proto.Unity.Modules.Environment;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace ClickBytez.Proto.Unity
@@ -21,7 +23,13 @@ namespace ClickBytez.Proto.Unity
                 if (_builder is null)
                 {
                     _builder = new ContainerBuilder();
-                    _builder.RegisterType<EnvironmentModule>().AsImplementedInterfaces().SingleInstance();
+                    _builder.RegisterInstance(GameConfiguration).AsImplementedInterfaces().SingleInstance();
+
+                    _builder.RegisterAssemblyTypes(AppDomain.CurrentDomain.GetAssemblies())
+                         .Where(type => type.IsSubclassOf(typeof(GameModule)))
+                         .As<GameModule>()
+                         .SingleInstance();
+
                     _builder.RegisterType<Game>().As<IGame>().SingleInstance().OnActivated(args => args.Instance.SetInstance(args.Instance));
                 }
 
@@ -55,7 +63,7 @@ namespace ClickBytez.Proto.Unity
             }
         }
 
-        public GameConfiguration GameConfiguration { get => gameConfiguration; set => gameConfiguration = value; }
+        public IGameConfiguration GameConfiguration { get => gameConfiguration; set => gameConfiguration = value; }
 
         private void Awake()
         {
@@ -76,7 +84,7 @@ namespace ClickBytez.Proto.Unity
         #region UNITY_PROPERTIES  
         [SerializeField]
         [SerializeReference]
-        private GameConfiguration gameConfiguration = new GameConfiguration();
+        private IGameConfiguration gameConfiguration = new GameConfiguration();
         #endregion
 
     }

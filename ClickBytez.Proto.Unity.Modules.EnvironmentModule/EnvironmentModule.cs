@@ -3,20 +3,24 @@ using UnityEngine;
 
 namespace ClickBytez.Proto.Unity.Modules.Environment
 {
-    public class EnvironmentModule : IGameModule, IEnvironment
+    public class EnvironmentModule : GameModule
     {
-        private GameObject _sun = default;
-        public GameObject Sun
-        {
-            get
-            {
-                if (_sun is null)
-                {
-                    _sun = GameObject.Find("Sun");
-                }
+        public static int Priority => 1;
+        public GameObject Sun { get; }
 
-                return _sun;
-            }
+        public EnvironmentModule()
+        {
+            Sun = GameObject.Find("Sun");
+        }
+
+        public override void DoWork()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Initialize()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

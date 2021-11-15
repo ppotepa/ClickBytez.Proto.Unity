@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickBytez.Proto.UnityIoC", "ClickBytez.Proto.UnityIoC\ClickBytez.Proto.UnityIoC.csproj", "{DFACCC34-23E5-4220-BD36-31C3C851C67C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClickBytez.Proto.UnityIoC", "ClickBytez.Proto.UnityIoC\ClickBytez.Proto.UnityIoC.csproj", "{DFACCC34-23E5-4220-BD36-31C3C851C67C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{DC7CB785-592F-4231-A06F-B790C23B251C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickBytez.Proto.Unity.Modules.Environment", "ClickBytez.Proto.Unity.Modules.EnvironmentModule\ClickBytez.Proto.Unity.Modules.Environment.csproj", "{5DEAC4B5-8804-44F7-87F3-AF5EA3EB4015}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClickBytez.Proto.Unity.Modules.Environment", "ClickBytez.Proto.Unity.Modules.EnvironmentModule\ClickBytez.Proto.Unity.Modules.Environment.csproj", "{5DEAC4B5-8804-44F7-87F3-AF5EA3EB4015}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickBytez.Proto.Unity.Core", "ClickBytez.Proto.Unity.Core\ClickBytez.Proto.Unity.Core.csproj", "{FF46368D-1394-4FCE-9E9D-B01EA8FDF8F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClickBytez.Proto.Unity.Core", "ClickBytez.Proto.Unity.Core\ClickBytez.Proto.Unity.Core.csproj", "{FF46368D-1394-4FCE-9E9D-B01EA8FDF8F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickBytez.Tools", "ClickBytez.Tools\ClickBytez.Tools.csproj", "{34F4F8F0-F92F-4786-A5B0-F11183B381FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{FF46368D-1394-4FCE-9E9D-B01EA8FDF8F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF46368D-1394-4FCE-9E9D-B01EA8FDF8F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF46368D-1394-4FCE-9E9D-B01EA8FDF8F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34F4F8F0-F92F-4786-A5B0-F11183B381FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34F4F8F0-F92F-4786-A5B0-F11183B381FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34F4F8F0-F92F-4786-A5B0-F11183B381FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34F4F8F0-F92F-4786-A5B0-F11183B381FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,6 +6,10 @@ namespace ClickBytez.Proto.Unity.Core.Configuration
     {
         [SerializeField]
         [SerializeReference]
+        private WorldConfiguration world = new WorldConfiguration();
+
+        [SerializeField]
+        [SerializeReference]
         private EnvironmentConfiguration environment = new EnvironmentConfiguration();
 
         [SerializeField]
@@ -40,6 +44,15 @@ namespace ClickBytez.Proto.Unity.Core.Configuration
             {
                 if (orbitrarySystem is null) orbitrarySystem = new OrbitrarySystemConfiguration();
                 return orbitrarySystem;
+            }
+        }
+
+        public WorldConfiguration World
+        {
+            get
+            {
+                if (world is null) world = new WorldConfiguration();
+                return world;
             }
         }
     }

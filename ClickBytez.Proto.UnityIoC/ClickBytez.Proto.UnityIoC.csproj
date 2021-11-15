@@ -33,6 +33,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ClickBytez.Proto.Unity.Core\ClickBytez.Proto.Unity.Core.csproj" />
     <ProjectReference Include="..\ClickBytez.Proto.Unity.Modules.EnvironmentModule\ClickBytez.Proto.Unity.Modules.Environment.csproj" />
+    <ProjectReference Include="..\ClickBytez.Tools\ClickBytez.Tools.csproj" />
   </ItemGroup>
 
   <ItemGroup>

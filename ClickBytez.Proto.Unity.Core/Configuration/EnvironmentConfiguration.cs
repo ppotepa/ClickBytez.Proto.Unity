@@ -2,6 +2,8 @@
 {
     public class EnvironmentConfiguration
     {
-        public int Clounts = 1;
+        public int DayOfYear;
+        public int Year;
+        public int Month;
     }
 }
